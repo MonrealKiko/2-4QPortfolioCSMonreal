@@ -56,18 +56,21 @@
 - Add in css ```position: relative; top: 20px; left: 20px;``` to .sidebar.
 
 - Guided Question: What changed compared to the default static positioning? Try to give different values to top and left or you can change it to bottom, right.
+- Answer: The positioning of the Sidebar changes in a way that it changes to its default position on the page, and other changes to its location adds to this default. This changes because previously the position of the Sidebar is dependent on the location of the other content. Now the Sidebar acts independently.
 
 ### Step 2 (Fixed):
 
 - Add in css ```position: fixed; bottom: 0; width: 100%;``` to .footer.
 
 - Guided Question: What happens when you scroll the page? Why does the footer behave differently from position relative?
+- Answer: After applying position fixed, the sidebar now only stays on a specific part of the page (bottom) with varying sizes depending on the zoom, despite scrolling to different areas. This is different from position relative, as relative is more free to change as it relies on values given from top/left/right/etc., and others. While fixed requires the content to be at a constant set area in the page. 
 
 ### Step 3 (Absolute):
 
 - Add in css ```position: absolute; top: 66px; left: 200px;``` to .content.
 
 - Guided Question: What is the effect of position: absolute on an element? How is it different from fixed?
+- Answer: Position absolute now completely completely acts independent from all other elements of the page. No longer relying on the default position, applying absolute can now shift content freely, even overlapping or floating other elements without affecting others. It now acts separate from the document flow, allowing other elements to move into this. 
 
 ### Step 4 : (Absolute)
 
@@ -87,6 +90,7 @@
 - Give .content a z-index: 1.
 
 - Guided Question: Why does the notice appear on top of the content? What happens if you swap the z‑index values?
+- Just like normal axes (x,y,z), the values of these axes can determine its location on the page. If the y-axis discusses its up-down location, x-axis discusses its left-right location (though a x/y-index doesn't exist), then intuitively the z-axis discusses its front-back location (similar to how the 3d axes look like). The z-index values work accordingly with all the other z-index values of the page. The highter the z-index, the more likely it appears at the front of the page (front = overlapping other content), and vice versa. Here "Notice!" appears at the front of the page, because as the other content doesn't have a z-index value, it defaults to zero. When comparing the values of the z-indexes, we can see that "Notice!" has a much higher z-index (2 > 0), therefore, the greater z-index value overlaps the smaller. Swapping the z-index values changes the content layering. In this case setting "Notice!"'s z-index to 0, makes it appear below the Main Content. Or even setting Main Content's z-index to 3, makes it appear over "Notice!".
 
 - Challenge: 
     * What changes that you have to do on the code that will position .notice box on the top right corner of the .content box? Please write the code on paper as well (both html and css on the part of .notice and .content).
@@ -96,9 +100,13 @@
 3. Please answer the following reflection questions (15 minutes)
 
     a. Could you summarize the differences between the CSS position values (static, relative, absolute, fixed)? 
+    - Answer: Static: is the default positioning for all css elements. Relative: Changes its location based on its static position. Absolute: Changes its location based on other elements' location. Fixed: Fixes the content on a specific location on the page regadless of scrolling. 
 
     b. How does absolute positioning depend on its parent element?
+    - Answer: 
 
     c. How do you differentiate sticky from fixed (you can research on sticky)?
+    - Content applied with fixed is fixed consistently based on the viewport. While content applied with sticky, although similar, only sticks in place relative to a parent container (location dependent on this container). 
 
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
+    - 
