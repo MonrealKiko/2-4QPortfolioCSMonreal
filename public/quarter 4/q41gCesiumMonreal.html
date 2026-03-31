@@ -7,17 +7,19 @@
 <style>
   body {
     font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
+    background-color: #000;
+    color: #eaeaea; 
     display: flex;
     justify-content: center;
     padding: 40px;
   }
 
   .container {
-    background: #eee;
+    background: #111; 
     padding: 30px;
     border-radius: 12px;
-    width: 500px;
+    width: 600px;
+    box-shadow: 0 0 20px rgba(255,255,255,0.05);
   }
 
   h2, h3 {
@@ -35,11 +37,40 @@
     padding: 10px;
     margin-top: 5px;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #333;
+    background-color: #000;
+    color: #fff;
+    transition: all 0.25s ease;
   }
 
-  .stars {
-    margin-top: 10px;
+  input:hover, select:hover {
+    border-color: #aaa;
+    box-shadow: 0 0 8px rgba(255,255,255,0.3);
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    background-color: #fff;  
+    color: #000;          
+    border-color: #fff;
+
+    box-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 40px rgba(255,255,255,0.9);
+  }
+
+  .star {
+    font-size: 24px;
+    cursor: pointer;
+    color: #555;
+    transition: 0.2s;
+  }
+
+  .star.active {
+    color: gold;
+    text-shadow: 0 0 13px gold;
   }
 
   .star {
@@ -66,17 +97,34 @@
 
   .movie-list {
     margin-top: 20px;
+    overflow: visible;
   }
 
   .movie-item {
-    background: #ddd;
+    background: #111;
+    border: 1px solid #333;
     padding: 10px;
     border-radius: 8px;
     margin-top: 10px;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .movie-item:hover {
+    transform: scale(1.10);
+    box-shadow: 0 0 15px rgba(255,255,255,0.3);
   }
 
   .gold {
     color: gold;
+  }
+
+  input::placeholder {
+    color: #888;
+  }
+
+  input:focus::placeholder {
+    color: #444;
   }
 </style>
 </head>
@@ -119,11 +167,13 @@
 </div>
 
 <script>
+  // inputed data for movies goes here⬇️⬇️
   let movies = JSON.parse(localStorage.getItem("movies")) || [];
   let rating = 0;
 
   const stars = document.querySelectorAll('.star');
 
+  // adds function to stars
   stars.forEach(star => {
     star.addEventListener('click', () => {
       rating = star.getAttribute('data-value');
@@ -148,19 +198,24 @@
     return result;
   }
 
+  // adds moves to the list ⬇️⬇️
   function addMovie() {
+    // calls functions for inputs
     const title = document.getElementById('title').value;
     const year = document.getElementById('year').value;
     const genre = document.getElementById('genre').value;
 
+    // if no data is inputted (== 0)
     if (!title || !year || rating == 0) {
       alert("Please fill all fields!");
       return;
     }
 
+    // creates the object
     const movie = { title, year, genre, rating };
     movies.push(movie);
 
+    // updates the localStorage
     localStorage.setItem("movies", JSON.stringify(movies));
 
     displayMovies();
